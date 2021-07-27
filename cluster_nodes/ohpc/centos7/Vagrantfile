@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+hosts = %q(
+192.168.50.10 rm1
+192.168.50.20 ex0
+192.168.50.21 ex1
+192.168.50.22 ex2
+192.168.50.23 ex3
+)
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.box_check_update = false
+
+  config.vm.provision "file", source: "slurm.conf", destination: "/tmp/slurm.conf"
+  config.vm.provision "shell" do |s|
+    s.privileged = true,
+    s.inline = %Q(
+      systemctl disable --now firewalld
+      setenforce Permissive
+      echo "#{hosts}" >> /etc/hosts
+      yum install -y epel-release
+      rpm -i https://github.com/openhpc/ohpc/releases/download/v1.3.GA/ohpc-release-1.3-1.el7.x86_64.rpm
+      yum install -y slurm-munge-ohpc slurm-example-configs-ohpc
+      echo 123456789101112131415161718192021222324 > /etc/munge/munge.key
+      systemctl restart munge
+      cp -v /tmp/slurm.conf /etc/slurm/slurm.conf
+    )
+  end
+
+  config.vm.define  "rm1" do |node|
+    node.vm.network "private_network", ip: "192.168.50.10"
+    node.vm.hostname = "rm1"
+    node.vm.provision "shell" do |s|
+      s.privileged = true,
+      s.inline = %q(
+        yum install -y slurm-slurmctld-ohpc
+        systemctl restart slurmctld
+      )
+    end
+  end
+
+  nodes = %w(ex0 ex1 ex2 ex3)
+  (0..(nodes.length - 1)).each do |num|
+    name = nodes[num]
+    config.vm.define "#{name}" do |node|
+      node.vm.hostname = name
+      node.vm.network "private_network", ip: "192.168.50.#{20+num}"
+      node.vm.provision "shell" do |s|
+        s.privileged = true,
+        s.inline = %q(
+          yum install -y slurm-slurmd-ohpc
+          systemctl restart slurmd
+        )
+      end
+    end
+  end
+
+end
+
