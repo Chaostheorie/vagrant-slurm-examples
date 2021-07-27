@@ -8,10 +8,6 @@ Repository structure:
 * [local/](local) - single node with `slurmdctld` & `slurmd` on localhost
 * [cluster/](cluster) - multi node deployment with dedicated nodes running `slurmd`
 
-## OpenHPC
-
-Install MUNGE, and Slurm from the OpenHPC [opc] repository.
-
 * Single nodes...
   - [local/ohpc/centos7](local/ohpc/centos7) CentOS 7, OpenHPC 1.3
   - [local/ohpc/centos8](local/ohpc/centos8) CentOS 8, OpenHPC 2
@@ -19,7 +15,7 @@ Install MUNGE, and Slurm from the OpenHPC [opc] repository.
 * Clusters...
   - [cluster/ohpc/centos7](cluster/ohpc/centos7) CentOS 7, OpenHPC 1.3
 
-## References
+### References
 
 [msc] MUNGE  
 <https://github.com/dun/munge>  
