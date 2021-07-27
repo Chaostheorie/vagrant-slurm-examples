@@ -14,6 +14,7 @@ Different Linux distributions, and sources for the Slurm RPM packages:
   - [local/ohpc/centos7](local/ohpc/centos7) CentOS 7, OpenHPC 1.3
   - [local/ohpc/centos8](local/ohpc/centos8) CentOS 8, OpenHPC 2
   - [local/epel/centos7](local/epel/centos7) CentOS 7, EPEL 7
+  - [local/epel/centos_stream8](local/epel/centos_stream8) CentOS Stream 8, EPEL 8
 * Clusters...
   - [cluster/ohpc/centos7](cluster/ohpc/centos7) CentOS 7, OpenHPC 1.3
 
