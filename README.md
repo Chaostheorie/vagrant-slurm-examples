@@ -5,10 +5,10 @@ test-environments for the Slurm workload management systems [slm].
 
 Repository structure:
 
-* [local/](local) - single node with `slurmdctld` & `slurmd` on localhost
-* [cluster/](cluster) - multi node deployment with dedicated nodes running `slurmd`
+* [local/](local) - single box with `slurmdctld` & `slurmd` on localhost
+* [cluster/](cluster) - multiple boxes with dedicated nodes running `slurmd`
 
-Different Linux distributions, and sources of the Slurm RPM packages:
+Different Linux distributions, and sources for the Slurm RPM packages:
 
 * Single nodes...
   - [local/ohpc/centos7](local/ohpc/centos7) CentOS 7, OpenHPC 1.3
@@ -28,7 +28,7 @@ Different Linux distributions, and sources of the Slurm RPM packages:
 <https://github.com/openhpc/ohpc/releases>  
 <http://build.openhpc.community/dist/>
 
-[slm] SLURM  
+[slm] Slurm  
 <https://schedmd.com/>  
 https://github.com/SchedMD/slurm  
 <https://slurm.schedmd.com/quickstart_admin.html>
