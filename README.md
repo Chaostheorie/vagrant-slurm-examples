@@ -8,6 +8,8 @@ Repository structure:
 * [local/](local) - single node with `slurmdctld` & `slurmd` on localhost
 * [cluster/](cluster) - multi node deployment with dedicated nodes running `slurmd`
 
+Different Linux distributions, and sources of the Slurm RPM packages:
+
 * Single nodes...
   - [local/ohpc/centos7](local/ohpc/centos7) CentOS 7, OpenHPC 1.3
   - [local/ohpc/centos8](local/ohpc/centos8) CentOS 8, OpenHPC 2
