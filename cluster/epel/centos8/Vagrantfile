@@ -55,6 +55,8 @@ Vagrant.configure("2") do |config|
           dnf install -y slurm-slurmd
           echo 'SLURMD_OPTIONS=--conf-server rm1' >> /etc/sysconfig/slurmd
           systemctl restart slurmd
+          rm -rf /etc/slurm
+          ln -sf /var/spool/slurm/d/conf-cache/ /etc/slurm
         )
       end
     end
