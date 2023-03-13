@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define  "rm1"
+  config.vm.box = "rockylinux/8"
+  config.vm.network "private_network", ip: "192.168.50.10"
+  config.vm.box_check_update = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.provision "shell" do |s|
+    s.privileged = true,
+    s.inline = %q(
+      dnf install -y epel-release
+      dnf config-manager --set-enabled powertools
+      dnf install -y munge
+      echo 123456789123456781234567812345678 > /etc/munge/munge.key
+      chown munge:munge /etc/munge/munge.key
+      chmod 600 /etc/munge/munge.key
+      systemctl enable --now munge
+      dnf install -y slurm-slurmctld slurm-slurmd
+      systemctl restart slurmctld slurmd
+    )
+  end
+end
